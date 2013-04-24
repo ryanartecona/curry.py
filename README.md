@@ -31,7 +31,7 @@ Curried functions that accept a variable number of arguments (i.e. `*args`) need
 
 Best of all, curried functions that don't accept variable positional arguments (`*args`) can be treated **exactly** as if they were normal functions! 
 
-Even with functions decorated with `@curried`, you need not treat them differently than if they were defined as normal functions, unless you *want* them to curry arguments. No need to worry about surprising or confusing colleagues!
+Even with functions decorated with `@curried`, you need not treat them differently than if they were defined as normal functions, unless you *want* them to curry arguments. No need to worry about surprising or confusing colleagues! And, no strange curry/uncurry semantics!
 
 	>>> add(10, 20)
 	30
