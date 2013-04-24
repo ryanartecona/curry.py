@@ -9,7 +9,7 @@ Curried functions accept arguments one-by-one, instead of all in a single call. 
 
 ### How?
 
-`curry` curries a function over the number of arguments it requires (which do not specify defaults). Optional arguments can be passed at any point in curried application as keywords.
+The `curried` function (also usable as a decorator) curries a function over the number of arguments it requires (which do not specify defaults). Optional arguments can be passed at any point in curried application as keywords.
 
 	>>> @curried
 	... def add(x, y, z=0):
@@ -28,6 +28,23 @@ Curried functions that accept a variable number of arguments (i.e. `*args`) need
 
 	>>> add_all(1)(2)(3)(4)()
 	10
+
+Best of all, curried functions that don't accept variable positional arguments (`*args`) can be treated **exactly** as if they were normal functions! 
+
+Even with functions decorated with `@curried`, you need not treat them differently than if they were defined as normal functions, unless you *want* them to curry arguments. No need to worry about surprising or confusing colleagues!
+
+	>>> add(10, 20)
+	30
+	>>> add(10, 20, 30)
+	60
+	>>> add(10, 20, 30, 40)
+	Traceback (most recent call last):
+	  File "<input>", line 1, in <module>
+	  File "curry.py", line 32, in curried_func
+	    return accum_curry(args, kwargs)
+	  File "curry.py", line 26, in accum_curry
+	    return func(*accum_args, **accum_kwargs)
+	TypeError: add() takes at most 3 arguments (4 given)
 
 ### Installation
 
