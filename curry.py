@@ -1,6 +1,7 @@
 from functools import wraps
 from inspect import getargspec
 
+
 def curry_n(n, func=None):
 	"""curry_n(n, func) returns a new function which takes any arguments,
 	returning callables that take any arguments until n argumentss 
@@ -25,7 +26,7 @@ def curry_n(n, func=None):
 			if not (args or kwargs) or len(accum_args) >= n:
 				return func(*accum_args, **accum_kwargs)
 			else:
-				return lambda *a, **kw: accum_curry(a, kw, accum_args, accum_kwargs)
+				return wraps(func)(lambda *a, **kw: accum_curry(a, kw, accum_args, accum_kwargs))
 
 		@wraps(func)
 		def curried_func(*args, **kwargs):
@@ -34,6 +35,7 @@ def curry_n(n, func=None):
 		return curried_func
 
 	return curry_func(func) if func else curry_func
+
 
 def curried(func):
 	"""Curries a function over the number of arguments it requires
